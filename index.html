@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TripGenie — Décris ton voyage. L'IA génère tout le reste.</title>
+<meta name="description" content="TripGenie transforme une phrase en un pack de voyage complet : vols, hôtels, restaurants, itinéraire, météo et budget, en moins de 30 secondes.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧞</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">✦</span>TripGenie
+    </a>
+    <nav class="site-nav" aria-label="Navigation principale">
+      <a href="#probleme">Le problème</a>
+      <a href="#pipeline">Comment ça marche</a>
+      <a href="#vibes">Les vibes</a>
+      <a href="#stack">Stack</a>
+    </nav>
+    <a class="btn btn-ghost" href="https://github.com/loties1533/tripgenie-app" target="_blank" rel="noopener">
+      Voir le code
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Générateur de voyage IA</p>
+        <h1>
+          Décris ton voyage.<br>
+          <span class="flip-line" aria-live="polite">
+            <span class="flip-window" id="flipWindow">TripGenie génère tout le reste.</span>
+          </span>
+        </h1>
+        <p class="lede">
+          Les comparateurs classiques te rendent 300 résultats bruts et te laissent
+          seul face au tri. TripGenie fait la synthèse à ta place — vols, hôtels,
+          restos, itinéraire, météo et budget, assemblés en un pack unique.
+        </p>
+        <div class="hero-cta">
+          <a href="https://tripgenie-api.onrender.com" class="btn btn-primary" target="_blank" rel="noopener">
+            Générer mon premier pack
+          </a>
+          <a href="#pipeline" class="btn btn-text">Comment ça marche ↓</a>
+        </div>
+        <ul class="hero-stats" aria-label="Repères clés">
+          <li><strong>&lt;30s</strong><span>par pack généré</span></li>
+          <li><strong>899</strong><span>tests automatisés</span></li>
+          <li><strong>5</strong><span>vibes de voyage</span></li>
+        </ul>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="boarding-pass" id="boardingPass">
+          <div class="bp-main">
+            <div class="bp-row bp-top">
+              <span class="bp-code">CDG</span>
+              <span class="bp-arrow">→</span>
+              <span class="bp-code bp-dest" id="bpDest">TOK</span>
+            </div>
+            <div class="bp-field">
+              <span class="bp-label">Destination</span>
+              <span class="bp-value" id="bpCity">Tokyo, Japon</span>
+            </div>
+            <div class="bp-row bp-meta">
+              <div class="bp-field">
+                <span class="bp-label">Vibe</span>
+                <span class="bp-value" id="bpVibe">Surprise</span>
+              </div>
+              <div class="bp-field">
+                <span class="bp-label">Budget</span>
+                <span class="bp-value" id="bpBudget">1 450 €</span>
+              </div>
+            </div>
+            <div class="bp-progress" role="img" aria-label="Génération du pack en cours">
+              <span class="bp-progress-label">Score du pack</span>
+              <div class="bp-bar"><div class="bp-bar-fill" id="bpBar"></div></div>
+              <span class="bp-score" id="bpScore">0.00</span>
+            </div>
+          </div>
+          <div class="bp-stub">
+            <div class="bp-stub-item">✈ Vols</div>
+            <div class="bp-stub-item">🏨 Hôtels</div>
+            <div class="bp-stub-item">🍜 Restos</div>
+            <div class="bp-stub-item">🌦 Météo</div>
+            <span class="bp-barcode" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEME ============ -->
+  <section id="probleme" class="section problem">
+    <div class="wrap">
+      <p class="eyebrow">Le constat</p>
+      <h2>Chercher un voyage, c'est un deuxième travail.</h2>
+      <div class="problem-grid">
+        <div class="stack-card stack-card--messy">
+          <p class="stack-card-label">Booking · Kayak · TripAdvisor</p>
+          <ul class="messy-list" aria-label="Résultats bruts de comparateur">
+            <li>Hôtel Sakura — 4.1★ — 89€/nuit</li>
+            <li>Vol CDG-NRT — 3 escales — 612€</li>
+            <li>Ryokan Fuji View — 4.6★ — 210€/nuit</li>
+            <li>Vol CDG-HND direct — 780€</li>
+            <li>Auberge Shibuya — 3.9★ — 54€/nuit</li>
+            <li>... et 295 résultats de plus</li>
+          </ul>
+          <p class="stack-card-foot">Filtrer. Comparer. Décider seul.</p>
+        </div>
+
+        <div class="problem-arrow" aria-hidden="true">
+          <span>TripGenie</span>
+          <svg viewBox="0 0 120 24" class="arrow-svg"><path d="M0 12 H110 M95 2 L112 12 L95 22" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+
+        <div class="stack-card stack-card--pack">
+          <p class="stack-card-label">Ton pack, prêt à partir</p>
+          <ul class="pack-list">
+            <li><span>Vol direct</span><strong>780 €</strong></li>
+            <li><span>Ryokan Fuji View</span><strong>4 nuits</strong></li>
+            <li><span>3 restaurants notés</span><strong>réservés</strong></li>
+            <li><span>Itinéraire jour/jour</span><strong>inclus</strong></li>
+          </ul>
+          <p class="stack-card-foot">Score qualité : <strong>0.87</strong> — généré en 24s.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PIPELINE ============ -->
+  <section id="pipeline" class="section pipeline">
+    <div class="wrap">
+      <p class="eyebrow">Sous le capot</p>
+      <h2>Un pipeline, pas un agent qui divague.</h2>
+      <p class="section-lede">
+        Les étapes sont fixes et prédictibles. Seul le chat de modification,
+        après la génération, est agentique.
+      </p>
+
+      <ol class="tag-chain">
+        <li class="tag">
+          <span class="tag-num">01</span>
+          <h3>Analyse</h3>
+          <p>Validation Zod de ta demande en langage naturel.</p>
+        </li>
+        <li class="tag">
+          <span class="tag-num">02</span>
+          <h3>Recherche</h3>
+          <p>Vols, hôtels, événements, météo et photo — en parallèle, via Tavily, PredictHQ et Open-Meteo.</p>
+        </li>
+        <li class="tag">
+          <span class="tag-num">03</span>
+          <h3>Assemblage</h3>
+          <p>Un LLM (Claude → Gemini → OpenRouter en cascade) compose le pack avec les données réelles injectées.</p>
+        </li>
+        <li class="tag">
+          <span class="tag-num">04</span>
+          <h3>Restaurants</h3>
+          <p>Fusion Foursquare, avec repli Yelp si nécessaire.</p>
+        </li>
+        <li class="tag">
+          <span class="tag-num">05</span>
+          <h3>Scoring</h3>
+          <p>Algorithme déterministe 0–1, pondéré selon la vibe choisie.</p>
+        </li>
+        <li class="tag">
+          <span class="tag-num">06</span>
+          <h3>Sauvegarde</h3>
+          <p>Persisté via Prisma si tu es connecté — sinon, ton pack reste éphémère.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="section features">
+    <div class="wrap">
+      <p class="eyebrow">Dans chaque pack</p>
+      <h2>Tout ce qu'il faut pour poser une valise.</h2>
+      <div class="feature-grid">
+        <article class="feature-tag"><span class="ft-icon">✈</span><h3>Vols réels</h3><p>Prix et compagnies via recherche web temps réel, pas d'invention du LLM.</p></article>
+        <article class="feature-tag"><span class="ft-icon">🏨</span><h3>Hôtels ciblés</h3><p>Sélectionnés selon ton style de voyage et ton niveau de budget.</p></article>
+        <article class="feature-tag"><span class="ft-icon">🍜</span><h3>Restaurants</h3><p>Adresses réelles via Foursquare, secours Yelp en cas d'indisponibilité.</p></article>
+        <article class="feature-tag"><span class="ft-icon">🎫</span><h3>Événements locaux</h3><p>Concerts et festivals pendant ton séjour, via PredictHQ.</p></article>
+        <article class="feature-tag"><span class="ft-icon">🗺</span><h3>Itinéraire</h3><p>Un déroulé jour par jour, prêt à suivre ou à modifier.</p></article>
+        <article class="feature-tag"><span class="ft-icon">🌦</span><h3>Météo</h3><p>Prévisions réelles Open-Meteo, aucune clé API nécessaire.</p></article>
+        <article class="feature-tag"><span class="ft-icon">💶</span><h3>Budget ventilé</h3><p>Réparti par poste de dépense, pas juste un total approximatif.</p></article>
+        <article class="feature-tag"><span class="ft-icon">★</span><h3>Score qualité</h3><p>Une note 0–1, 100% déterministe, qui mesure l'adéquation à ta vibe.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIBES ============ -->
+  <section id="vibes" class="section vibes">
+    <div class="wrap">
+      <p class="eyebrow">Cinq vibes, un axe budget</p>
+      <h2>Le mode change l'ambiance. Le budget est à part.</h2>
+      <p class="section-lede">
+        <strong>Premium</strong> n'est pas une vibe — c'est un curseur indépendant qui
+        relève les plafonds et privilégie le haut de gamme, quelle que soit la vibe choisie.
+      </p>
+
+      <div class="vibes-row">
+        <div class="stamp"><span class="stamp-emoji">🎉</span><span>Party</span></div>
+        <div class="stamp"><span class="stamp-emoji">🎓</span><span>Student</span></div>
+        <div class="stamp"><span class="stamp-emoji">👥</span><span>Group</span></div>
+        <div class="stamp"><span class="stamp-emoji">🧘</span><span>Relax</span></div>
+        <div class="stamp"><span class="stamp-emoji">🎲</span><span>Surprise</span></div>
+      </div>
+
+      <div class="premium-toggle-demo">
+        <span>Classique</span>
+        <button class="toggle-switch" id="premiumToggle" role="switch" aria-checked="false" aria-label="Basculer le niveau de prix">
+          <span class="toggle-thumb"></span>
+        </button>
+        <span>Premium</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STACK ============ -->
+  <section id="stack" class="section stack">
+    <div class="wrap">
+      <p class="eyebrow">Construit sérieusement</p>
+      <h2>Une stack pensée pour tenir en production.</h2>
+      <div class="luggage-row" aria-label="Technologies utilisées">
+        <span class="luggage-tag">React 18</span>
+        <span class="luggage-tag">TypeScript</span>
+        <span class="luggage-tag">Express 4</span>
+        <span class="luggage-tag">Prisma 6</span>
+        <span class="luggage-tag">PostgreSQL</span>
+        <span class="luggage-tag">Zod v4</span>
+        <span class="luggage-tag">JWT + bcrypt</span>
+        <span class="luggage-tag">Vitest — 899 tests</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="section final-cta">
+    <div class="wrap final-cta-inner">
+      <h2>Embarquement immédiat.</h2>
+      <p>Décris ta prochaine escapade en une phrase. Le reste, c'est TripGenie.</p>
+      <a href="https://tripgenie-api.onrender.com" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+        Générer mon pack de voyage
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>TripGenie — Projet solo, Juin 2026.</span>
+    <div class="footer-links">
+      <a href="https://github.com/loties1533/tripgenie-app" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://tripgenie-api.onrender.com/api/docs" target="_blank" rel="noopener">Documentation API</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
