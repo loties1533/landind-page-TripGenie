@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TripGenie — Décrivez votre voyage, on s'occupe du reste</title>
-<meta name="description" content="TripGenie transforme une phrase en un pack de voyage complet : vols, hôtels, restaurants, itinéraire et budget.">
+<meta name="description" content="TripGenie transforme une phrase en un pack de voyage complet : vols, hôtels, restaurants, itinéraire et budget, réunis sur une seule page.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -15,9 +15,9 @@
 <!-- ============ HEADER ============ -->
 <header class="site-header">
   <div class="wrap header-inner">
-    <a href="#" class="logo">
+    <a href="#top" class="logo">
       <span class="logo-badge">T</span>
-      <span class="logo-text">TripGenie<br><small>Voyages sur-mesure</small></span>
+      <span class="logo-text">TripGenie<small>Voyages sur-mesure</small></span>
     </a>
     <nav class="site-nav" aria-label="Navigation principale">
       <a href="#fonctionnalites">Fonctionnalités</a>
@@ -29,23 +29,42 @@
   </div>
 </header>
 
-<main>
+<main id="top">
 
   <!-- ============ HERO / INTRO ============ -->
   <section class="hero">
-    <img class="hero-cover" src="assets/hero-cover.png" alt="Trois destinations de voyage : Bali, Tokyo et Santorin">
-    <div class="hero-overlay">
-      <div class="wrap">
-        <p class="eyebrow">Générateur de voyage par IA</p>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Générateur d'itinéraires de voyage</p>
         <h1>Décrivez votre voyage.<br>On s'occupe du reste.</h1>
         <p class="lede">
-          Les comparateurs classiques renvoient des centaines de résultats bruts et
-          laissent l'utilisateur trier seul. TripGenie fait la synthèse à sa place :
-          vols, hôtels, restaurants, itinéraire et budget, réunis en un seul pack.
+          Préparer un séjour, c'est aujourd'hui une quinzaine d'onglets ouverts et
+          des heures de tri. TripGenie renverse la logique : vous décrivez où vous
+          voulez aller, avec quel budget et dans quel esprit — l'application assemble
+          un pack cohérent (vols, hôtels, restaurants, itinéraire et budget) sur une
+          seule page.
         </p>
-        <a class="btn btn-primary btn-lg" href="https://tripgenie-api.onrender.com" target="_blank" rel="noopener">
-          Essayer l'application
-        </a>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="https://tripgenie-api.onrender.com" target="_blank" rel="noopener">
+            Essayer l'application
+          </a>
+          <a class="btn btn-ghost btn-lg" href="https://github.com/loties1533/tripgenie-app" target="_blank" rel="noopener">
+            Voir le dépôt
+          </a>
+        </div>
+        <p class="hero-meta">React · TypeScript · Node · PostgreSQL — projet portfolio, 2026</p>
+      </div>
+
+      <div class="hero-visual">
+        <figure class="shot shot--tilt">
+          <div class="shot-bar">
+            <span class="shot-dots"><i></i><i></i><i></i></span>
+            <span class="shot-url">tripgenie.app / voyage / lisbonne</span>
+          </div>
+          <div class="shot-view shot-view--top">
+            <img src="assets/feature-apercu.jpg" alt="Pack de voyage TripGenie pour Lisbonne : score de qualité, carte et détails du séjour" loading="eager">
+          </div>
+        </figure>
       </div>
     </div>
   </section>
@@ -54,47 +73,67 @@
   <section id="fonctionnalites" class="section features">
     <div class="wrap">
       <p class="eyebrow">Fonctionnalités</p>
-      <h2>Ce que fait TripGenie</h2>
+      <h2>Trois écrans, un séjour prêt à partir</h2>
 
       <article class="feature">
-        <div class="feature-media">
-          <img src="assets/feature-assistant.jpg" alt="Assistant conversationnel TripGenie sur la page d'accueil">
-        </div>
+        <figure class="shot feature-media">
+          <div class="shot-bar">
+            <span class="shot-dots"><i></i><i></i><i></i></span>
+            <span class="shot-url">tripgenie.app / accueil</span>
+          </div>
+          <div class="shot-view shot-view--top">
+            <img src="assets/feature-assistant.jpg" alt="Page d'accueil de TripGenie avec l'assistant conversationnel" loading="lazy">
+          </div>
+        </figure>
         <div class="feature-copy">
+          <p class="feature-num">01</p>
           <h3>Un assistant qui prépare le voyage avec vous</h3>
           <p>
-            Un chat guide la préparation dès la page d'accueil : décrire son voyage en
-            une phrase, ou répondre à quelques questions pour définir ses préférences
-            de façon plus précise. L'assistant s'occupe ensuite de la recherche.
+            Dès la page d'accueil, un échange guide la préparation : décrire son voyage
+            en une phrase, ou répondre à quelques questions pour préciser ses envies.
+            L'application se charge ensuite de la recherche.
           </p>
         </div>
       </article>
 
       <article class="feature feature-reverse">
-        <div class="feature-media">
-          <img src="assets/feature-preferences.jpg" alt="Page de préférences pré-remplies : ville de départ, mode de voyage, budget, centres d'intérêt">
-        </div>
+        <figure class="shot feature-media">
+          <div class="shot-bar">
+            <span class="shot-dots"><i></i><i></i><i></i></span>
+            <span class="shot-url">tripgenie.app / préférences</span>
+          </div>
+          <div class="shot-view shot-view--center">
+            <img src="assets/feature-preferences.jpg" alt="Page de préférences : ville de départ, mode de voyage, niveau de confort et centres d'intérêt" loading="lazy">
+          </div>
+        </figure>
         <div class="feature-copy">
-          <h3>Des préférences pré-remplies après l'inscription</h3>
+          <p class="feature-num">02</p>
+          <h3>Des réglages retenus une fois pour toutes</h3>
           <p>
-            Une fois inscrit, l'utilisateur retrouve une page de préférences déjà
-            complétée : ville de départ, mode de voyage par défaut, niveau de confort
-            et centres d'intérêt. Chaque nouveau pack part de ces réglages, sans tout
-            redemander à chaque fois.
+            Après l'inscription, la page de préférences est déjà pré-remplie : ville de
+            départ, mode de voyage, niveau de confort et centres d'intérêt. Chaque
+            nouveau pack part de ces réglages, sans tout redemander.
           </p>
         </div>
       </article>
 
       <article class="feature">
-        <div class="feature-media">
-          <img src="assets/feature-apercu.jpg" alt="Aperçu complet d'un pack de voyage pour Lisbonne : hôtels, vols, carte et score">
-        </div>
+        <figure class="shot feature-media">
+          <div class="shot-bar">
+            <span class="shot-dots"><i></i><i></i><i></i></span>
+            <span class="shot-url">tripgenie.app / voyage / lisbonne</span>
+          </div>
+          <div class="shot-view shot-view--center">
+            <img src="assets/feature-apercu.jpg" alt="Détail d'un pack de voyage : carte interactive, hôtels et vols estimés" loading="lazy">
+          </div>
+        </figure>
         <div class="feature-copy">
-          <h3>Un pack complet, prêt à consulter</h3>
+          <p class="feature-num">03</p>
+          <h3>Un pack complet, sur une seule page</h3>
           <p>
-            Chaque voyage généré tient sur une seule page : score de qualité, carte
-            interactive, hôtels, vols et activités. Tout est visible d'un coup d'œil,
-            avec la possibilité d'ouvrir chaque section pour plus de détail.
+            Le voyage généré tient d'un coup d'œil : score de qualité, carte interactive,
+            hôtels, vols et activités. Chaque section s'ouvre pour plus de détail, et le
+            pack reste modifiable jusqu'au dernier moment.
           </p>
         </div>
       </article>
@@ -104,29 +143,32 @@
   <!-- ============ ABOUT ============ -->
   <section id="a-propos" class="section about">
     <div class="wrap about-grid">
-      <div>
+      <div class="about-story">
         <p class="eyebrow">À propos</p>
         <h2>Pourquoi ce projet</h2>
         <p>
           L'idée part d'un constat simple : préparer un voyage est fatigant. On ouvre
           une quinzaine d'onglets, on saute d'un comparateur de vols à un blog, d'un
           site d'avis à une carte, on note des idées dans un coin — et au bout de deux
-          heures, on se retrouve avec une bouillie d'informations sans vraiment de plan.
-          Le problème n'est pas le manque d'informations, c'est qu'il y en a trop, et
-          qu'elles sont éparpillées.
+          heures, on se retrouve avec une bouillie d'informations sans vrai plan. Le
+          problème n'est pas le manque d'informations : il y en a trop, et elles sont
+          éparpillées.
         </p>
         <p>
-          Avec TripGenie, j'ai voulu renverser cette logique : au lieu de chercher
-          partout, c'est l'application qui rassemble et qui propose. On décrit où l'on
-          veut aller, avec quel budget et dans quel esprit, et l'application construit
-          un pack de voyage cohérent — que l'on peut ensuite ajuster.
+          Avec TripGenie, j'ai voulu renverser cette logique. Au lieu de chercher
+          partout, c'est l'application qui rassemble et qui propose : on décrit où l'on
+          veut aller, avec quel budget et dans quel esprit, et elle construit un pack de
+          voyage cohérent — que l'on ajuste ensuite librement.
         </p>
-        
+        <p class="about-note">
+          Projet réalisé dans le cadre du portfolio de fin de formation à Holberton School.
+        </p>
       </div>
 
-      <div class="about-card">
+      <aside class="about-card">
+        <p class="about-card-label">L'auteur</p>
         <h3>Alexis Laubert</h3>
-        <p>Développeur — auteur de TripGenie</p>
+        <p class="about-card-role">Développeur — auteur de TripGenie</p>
         <ul class="link-list">
           <li><a href="https://github.com/loties1533" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://www.linkedin.com/in/alexislaubert/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -137,7 +179,7 @@
           <li><a href="https://github.com/loties1533/tripgenie-app" target="_blank" rel="noopener">Dépôt GitHub</a></li>
           <li><a href="https://tripgenie-api.onrender.com" target="_blank" rel="noopener">Application déployée</a></li>
         </ul>
-      </div>
+      </aside>
     </div>
   </section>
 
@@ -146,7 +188,10 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <span>TripGenie — Portfolio Project, Holberton School, 2026.</span>
-    <a href="https://github.com/loties1533/tripgenie-app" target="_blank" rel="noopener">GitHub</a>
+    <div class="footer-links">
+      <a href="https://github.com/loties1533/tripgenie-app" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://tripgenie-api.onrender.com" target="_blank" rel="noopener">Application</a>
+    </div>
   </div>
 </footer>
 
